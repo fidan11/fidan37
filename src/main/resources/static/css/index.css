@@ -1,0 +1,30 @@
+#main-panel {
+
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 33px;
+}
+
+.form-panel {
+    display: block;
+    border: 1px solid;
+    padding: 22px;
+    border-radius: 10px;
+    background-color: lavender;
+    position: fixed;
+    margin-left: 30%;
+    margin-top: 0%;
+    right: 34%;
+    top: 33%;
+    width: 368px;
+    height: 142px;
+}
+
+.form-panel input {
+    float: right;
+}
+
+.form-panel div {
+    height: 26px;
+}
