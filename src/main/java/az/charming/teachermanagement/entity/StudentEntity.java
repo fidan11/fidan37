@@ -6,10 +6,11 @@ import java.util.List;
 
 @Entity//hibernate,eclipselink
 @Table(name = "student")
-@NamedQuery(query = "select s from StudentEntity s where s.school.id=:id and s.age=:age",name = "nqFindByCshoolIdAndAge")
+//@NamedQuery(query = "select s from StudentEntity s where s.school.id=:id and s.age=:age",name = "nqFindByCshoolIdAndAge")
 public class StudentEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String surname;
@@ -21,7 +22,8 @@ public class StudentEntity {
                     CascadeType.PERSIST,
                     CascadeType.MERGE,
                     CascadeType.REMOVE
-            })
+            }
+    )
     @JoinTable(name = "student_teacher",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id")
@@ -32,11 +34,12 @@ public class StudentEntity {
     @JoinColumn(name = "school_id")//bunun vasitesi ile join oluram school table-na
     private SchoolEntity school;
 
+
     public Integer getId() {
         return id;
     }
 
-    public az.charming.teachermanagement.entity.StudentEntity setId(Integer id) {
+    public StudentEntity setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -45,7 +48,7 @@ public class StudentEntity {
         return name;
     }
 
-    public az.charming.teachermanagement.entity.StudentEntity setName(String name) {
+    public StudentEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -54,7 +57,7 @@ public class StudentEntity {
         return surname;
     }
 
-    public az.charming.teachermanagement.entity.StudentEntity setSurname(String surname) {
+    public StudentEntity setSurname(String surname) {
         this.surname = surname;
         return this;
     }
@@ -63,7 +66,7 @@ public class StudentEntity {
         return age;
     }
 
-    public az.charming.teachermanagement.entity.StudentEntity setAge(Integer age) {
+    public StudentEntity setAge(Integer age) {
         this.age = age;
         return this;
     }
@@ -72,7 +75,7 @@ public class StudentEntity {
         return scholarship;
     }
 
-    public az.charming.teachermanagement.entity.StudentEntity setScholarship(BigDecimal scholarship) {
+    public StudentEntity setScholarship(BigDecimal scholarship) {
         this.scholarship = scholarship;
         return this;
     }
@@ -81,16 +84,18 @@ public class StudentEntity {
         return teacherList;
     }
 
-    public void setTeacherList(List<TeacherEntity> teacherList) {
+    public StudentEntity setTeacherList(List<TeacherEntity> teacherList) {
         this.teacherList = teacherList;
+        return this;
     }
 
     public SchoolEntity getSchool() {
         return school;
     }
 
-    public void setSchool(SchoolEntity school) {
+    public StudentEntity setSchool(SchoolEntity school) {
         this.school = school;
+        return this;
     }
 
     @Override
@@ -103,4 +108,5 @@ public class StudentEntity {
                 ", scholarship=" + scholarship +
                 '}';
     }
+
 }

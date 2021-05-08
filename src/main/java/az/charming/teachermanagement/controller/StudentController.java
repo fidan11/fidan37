@@ -1,11 +1,10 @@
 package az.charming.teachermanagement.controller;
 
 
-import az.charming.teachermanagement.dto.StudentFormDto;
+import az.charming.teachermanagement.dto.StudentDto;
 import az.charming.teachermanagement.entity.StudentEntity;
 import az.charming.teachermanagement.repository.StudentRepository;
-import az.charming.teachermanagement.sevice.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import az.charming.teachermanagement.sevice.functional.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
+@RequestMapping("students")//StudentControllere gele bilmesi ucun students yazmaliyiq
 public class StudentController {
 
     private final StudentRepository studentRepository;
@@ -24,7 +24,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @RequestMapping(value = "students", method = {RequestMethod.GET})
+    @GetMapping
     public String index(Model model,
                         @RequestParam(required = false) String name,//false demek mecburidir eks halda sehifeye daxil
                         // olduqda deyecek mene name,surname,age,scholarship gondermelisen
@@ -33,22 +33,18 @@ public class StudentController {
                         @RequestParam(required = false) BigDecimal scholarship
     ) {
 
-        List<StudentEntity> list = studentService.findAll(
+        List<StudentDto> list = studentService.findAll(
                 name,
                 surname,
                 age,
                 scholarship
         );
-//        for (StudentEntity l : list) {
-//            System.out.println(l.getTeacherList());
-//            System.out.println(l.getSchool());
-//        }
 
         model.addAttribute("list", list);
         return "students/index";//bu urli goster
     }
 
-    @RequestMapping(value = "students/add", method = {RequestMethod.POST})
+    @PostMapping(value = "/add")
     public String add(@ModelAttribute StudentEntity studentEntity    //bize FormDto gelir ve onun toEntity
 //  methodunu cagiririq,toEntity methodu obyektin ozunden bir dene entity duzeltdi onu return eledi  ve
 //  onu studentRepository inserte gonderirik.
@@ -62,7 +58,7 @@ public class StudentController {
     }
 
 
-    @RequestMapping(value = "students/update", method = {RequestMethod.POST})
+    @PostMapping(value = "/update")
     public String update(@ModelAttribute StudentEntity studentEntity
     ) {
         studentRepository.save(studentEntity);
@@ -70,7 +66,7 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    @RequestMapping(value = "students/delete", method = {RequestMethod.POST})
+    @PostMapping(value = "/delete")
     public String delete(@RequestParam(required = false) Integer id) {
         studentRepository.deleteById(id);
         return "redirect:/students";

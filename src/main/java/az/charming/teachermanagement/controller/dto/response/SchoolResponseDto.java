@@ -1,19 +1,8 @@
-package az.charming.teachermanagement.entity;
+package az.charming.teachermanagement.controller.dto.response;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "school_address")
-public class SchoolAddressEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SchoolResponseDto {
     private Integer id;
     private String name;
-
-    @OneToOne
-    @JoinColumn(name = "school_id")
-    private SchoolEntity school;
 
     public Integer getId() {
         return id;

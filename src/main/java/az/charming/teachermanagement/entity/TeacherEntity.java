@@ -9,6 +9,7 @@ import java.util.List;
 public class TeacherEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String surname;
@@ -29,7 +30,7 @@ public class TeacherEntity {
         return id;
     }
 
-    public az.charming.teachermanagement.entity.TeacherEntity setId(Integer id) {
+    public TeacherEntity setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -38,35 +39,18 @@ public class TeacherEntity {
         return name;
     }
 
-    public az.charming.teachermanagement.entity.TeacherEntity setName(String name) {
+    public TeacherEntity setName(String name) {
         this.name = name;
         return this;
     }
 
-    public String getSurname() {
-        return surname;
+
+    public List<StudentEntity> getStudentList() {
+        return studentList;
     }
 
-    public az.charming.teachermanagement.entity.TeacherEntity setSurname(String surname) {
-        this.surname = surname;
-        return this;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public az.charming.teachermanagement.entity.TeacherEntity setAge(Integer age) {
-        this.age = age;
-        return this;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public az.charming.teachermanagement.entity.TeacherEntity setSalary(BigDecimal salary) {
-        this.salary = salary;
+    public TeacherEntity setStudentList(List<StudentEntity> studentList) {
+        this.studentList = studentList;
         return this;
     }
 

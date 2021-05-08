@@ -2,6 +2,7 @@ package az.charming.teachermanagement.sevice;
 
 import az.charming.teachermanagement.entity.StudentEntity;
 import az.charming.teachermanagement.repository.StudentRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
+@Primary
 @Service
 public class StudentService {
 
